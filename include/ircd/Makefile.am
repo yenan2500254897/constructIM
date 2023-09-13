@@ -23,6 +23,32 @@ CXXFLAGS += $(EXTRA_CXXFLAGS)
 includedir = @includedir@/ircd
 nobase_include_HEADERS = $(DEPS)
 
+if BUILD_PCH # --- Actions when Precompiled headers enabled
+
+noinst_HEADERS = *.gch
+BUILT_SOURCES = \
+	ircd.h.gch \
+	ircd.pic.h.gch \
+	###
+
+ircd.h.gch: ircd.h
+	$(CXX) $(AM_CXXFLAGS) $(CXXFLAGS) -o ircd.h.gch $(DEFS) $(AM_CPPFLAGS) $(CPPFLAGS) ircd.h
+
+ircd.pic.h.gch: ircd.h
+	cp ircd.h ircd.pic.h
+	$(CXX) $(AM_CXXFLAGS) $(CXXFLAGS) -fPIC -o ircd.pic.h.gch $(DEFS) $(AM_CPPFLAGS) $(CPPFLAGS) -DPIC ircd.pic.h
+
+else # --- Actions without Precompiled Headers enabled
+
+BUILT_SOURCES = \
+	ircd.pic.h \
+	###
+
+ircd.pic.h: ircd.h
+	cp ircd.h ircd.pic.h
+
+endif # --- /BUILD_PCH
+
 #
 # Clean / Install
 #

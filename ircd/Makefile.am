@@ -30,6 +30,11 @@ AM_LDFLAGS += -Wl,-z,nodlopen
 AM_LDFLAGS += -Wl,-z,lazy
 AM_LDFLAGS += $(PLATFORM_LDFLAGS)
 
+if CLANG_PCH
+AM_CPPFLAGS += -include-pch $(top_srcdir)/include/ircd/ircd.pic.h.gch
+else
+AM_CPPFLAGS += -include ircd/ircd.pic.h
+endif
 
 if CLANG
 if !CLANG_PCH
@@ -127,6 +132,7 @@ libircd_la_LIBADD += $(EXTRA_LIBS)
 
 libircd_la_SOURCES =#
 #libircd_la_SOURCES += ctx_posix.cc
+libircd_la_SOURCES += allocator.cc
 
 #
 # Specific unit option composition

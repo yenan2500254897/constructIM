@@ -17,7 +17,20 @@ AM_CPPFLAGS = \
 
 AM_LDFLAGS = \
 	-dlopen self \
+	-Wl,--warn-execstack \
+	-Wl,--warn-common \
+	-Wl,--detect-odr-violations \
+	-Wl,--unresolved-symbols=report-all \
+	-Wl,--allow-shlib-undefined \
+	-Wl,--dynamic-list-data \
+	-Wl,--dynamic-list-cpp-new\
+	-Wl,--dynamic-list-cpp-typeinfo \
+	-Wl,--rosegment \
+	-Wl,-z,noexecstack \
+	-Wl,--wrap=epoll_wait \
+	-Wl,--wrap=io_uring_queue_init \
 	-L$(top_srcdir)/ircd \
+	$(PLATFORM_LDFLAGS) \
 	$(EXTRA_LDFLAGS) \
 	###
 
@@ -34,4 +47,5 @@ testEnv_LDADD = \
 
 testEnv_SOURCES = \
 	test_env.cc    \
+	test_allocator.cc   \
 	###
