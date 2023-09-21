@@ -1,10 +1,6 @@
 #pragma once
 #define HAVE_IRCD_ALLOCATOR_STATE_H
 
-#include <stddef.h>
-#include <stdint.h>
-#include <stdlib.h>
-
 /*
 类似环状数组，在其中找到连续的长度为n的区域，标记用来存数据（首尾不相接）
 */

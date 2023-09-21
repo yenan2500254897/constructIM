@@ -105,7 +105,7 @@ namespace ircd
 		using int128_t = signed __int128;
 		using uint128_t = unsigned __int128;
 	#else
-		#error "Missing 128 bit integer types on this platform."
+		// #error "Missing 128 bit integer types on this platform."
 	#endif
 }
 #endif

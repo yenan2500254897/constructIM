@@ -18,10 +18,18 @@
 #include "config.h"
 #include "stdinc.h"                    // Standard library includes.
 #include "portable.h"
+#include "stduse.h"
 
 //
 // Project library interfaces
 //
+#include "util/mask.h"
+#include "util/align.h"
+#include "string_view.h"
+#include "buffer/buffer.h"
 #include "allocator/allocator.h"
+#include "util/util.h"
+#include "strl.h"
+#include "strn.h"
 
 #endif

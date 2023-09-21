@@ -133,6 +133,9 @@ libircd_la_LIBADD += $(EXTRA_LIBS)
 libircd_la_SOURCES =#
 #libircd_la_SOURCES += ctx_posix.cc
 libircd_la_SOURCES += allocator.cc
+libircd_la_SOURCES += allocator_gnu.cc
+libircd_la_SOURCES += allocator_je.cc
+
 
 #
 # Specific unit option composition

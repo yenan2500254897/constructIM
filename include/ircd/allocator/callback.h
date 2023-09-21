@@ -1,7 +1,5 @@
 #pragma once
 #define HAVE_IRCD_ALLOCATOR_CALLBACK_H
-#include <functional>
-#include <assert.h>
 
 /*
 处理内存分配与回收
