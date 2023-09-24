@@ -24,6 +24,10 @@ namespace ircd
 #include "instance_list.h"
 #include "typography.h"
 #include "pubsetbuf.h"
+#include "va_rtti.h"
+#include "string.h"
+#include "pretty.h"
+#include "what.h"
 
 // Unsorted section
 namespace ircd {

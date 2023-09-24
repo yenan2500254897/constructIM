@@ -29,7 +29,12 @@
 #include "buffer/buffer.h"
 #include "allocator/allocator.h"
 #include "util/util.h"
+#include "exception.h"
+#include "panic.h"
+#include "terminate.h"
 #include "strl.h"
 #include "strn.h"
+#include "time.h"
+#include "fmt.h"
 
 #endif

@@ -46,7 +46,7 @@ AM_CXXFLAGS += -fno-c++-static-destructors
 endif
 endif
 
-bin_PROGRAMS = testAllocator testBuffer
+bin_PROGRAMS = testAllocator testBuffer testSystemTime
 
 testAllocator_LDFLAGS = \
 	$(AM_LDFLAGS) \
@@ -72,4 +72,17 @@ testBuffer_LDADD = \
 
 testBuffer_SOURCES = \
 	test_buffer.cc    \
+	###
+
+testSystemTime_LDFLAGS = \
+	$(AM_LDFLAGS) \
+	###
+
+testSystemTime_LDADD = \
+	-lircd \
+	$(EXTRA_LIBS) \
+	###
+
+testSystemTime_SOURCES = \
+	test_system_time.cc    \
 	###

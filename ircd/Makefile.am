@@ -131,10 +131,13 @@ libircd_la_LIBADD += $(EXTRA_LIBS)
 #
 
 libircd_la_SOURCES =#
+libircd_la_SOURCES += exception.cc
 #libircd_la_SOURCES += ctx_posix.cc
 libircd_la_SOURCES += allocator.cc
 libircd_la_SOURCES += allocator_gnu.cc
 libircd_la_SOURCES += allocator_je.cc
+libircd_la_SOURCES += util.cc
+libircd_la_SOURCES += timedate.cc
 
 
 #
@@ -160,6 +163,14 @@ GPT_FP_CXXFLAGS += -fdenormal-fp-math=positive-zero
 GPT_FP_CXXFLAGS += -ffp-model=fast
 endif
 endif
+
+if CLANG_PCH
+ASIO_UNIT_CPPFLAGS += -include-pch $(top_srcdir)/include/ircd/asio.h.gch
+else
+ASIO_UNIT_CPPFLAGS += -include ircd/asio.h
+endif
+
+exception.lo:         AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}
 
 ###############################################################################
 #
