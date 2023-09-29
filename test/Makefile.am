@@ -46,7 +46,13 @@ AM_CXXFLAGS += -fno-c++-static-destructors
 endif
 endif
 
-bin_PROGRAMS = testAllocator testBuffer testSystemTime
+if CLANG_PCH
+ASIO_UNIT_CPPFLAGS += -include-pch $(top_srcdir)/include/ircd/asio.h.gch
+else
+ASIO_UNIT_CPPFLAGS += -include ircd/asio.h
+endif
+
+bin_PROGRAMS = testAllocator testBuffer testSystemTime testCtx
 
 testAllocator_LDFLAGS = \
 	$(AM_LDFLAGS) \
@@ -86,3 +92,20 @@ testSystemTime_LDADD = \
 testSystemTime_SOURCES = \
 	test_system_time.cc    \
 	###
+
+testCtx_LDFLAGS = \
+	$(AM_LDFLAGS) \
+	@BOOST_LDFLAGS@ \
+	###
+
+testCtx_LDADD = \
+	-lircd \
+	@BOOST_LIBS@ \
+	$(EXTRA_LIBS) \
+	###
+
+testCtx_SOURCES = \
+	test_ctx.cc    \
+	###
+
+test_ctx.o:            AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}

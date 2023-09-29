@@ -131,13 +131,21 @@ libircd_la_LIBADD += $(EXTRA_LIBS)
 #
 
 libircd_la_SOURCES =#
+# libircd_la_SOURCES += assert.cc
 libircd_la_SOURCES += exception.cc
-#libircd_la_SOURCES += ctx_posix.cc
 libircd_la_SOURCES += allocator.cc
 libircd_la_SOURCES += allocator_gnu.cc
 libircd_la_SOURCES += allocator_je.cc
 libircd_la_SOURCES += util.cc
 libircd_la_SOURCES += timedate.cc
+libircd_la_SOURCES += ios.cc
+libircd_la_SOURCES += run.cc
+libircd_la_SOURCES += ctx_x86_64.S
+libircd_la_SOURCES += ctx.cc
+libircd_la_SOURCES += ctx_eh.cc
+libircd_la_SOURCES += ctx_ole.cc
+libircd_la_SOURCES += ctx_posix.cc
+libircd_la_SOURCES += ircd.cc
 
 
 #
@@ -171,6 +179,11 @@ ASIO_UNIT_CPPFLAGS += -include ircd/asio.h
 endif
 
 exception.lo:         AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}
+ios.lo:               AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}
+ctx_x86_64.lo:        AM_CPPFLAGS := -I$(top_srcdir)/include ${BOOST_CPPFLAGS}
+ctx.lo:               AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}
+ctx_ole.lo:           AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}
+ctx_eh.lo:            AM_CPPFLAGS := ${AM_CPPFLAGS} ${ASIO_UNIT_CPPFLAGS}
 
 ###############################################################################
 #

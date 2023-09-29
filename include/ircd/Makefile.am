@@ -39,7 +39,7 @@ ircd.pic.h.gch: ircd.h
 	cp ircd.h ircd.pic.h
 	$(CXX) $(AM_CXXFLAGS) $(CXXFLAGS) -fPIC -o ircd.pic.h.gch $(DEFS) $(AM_CPPFLAGS) $(CPPFLAGS) -DPIC ircd.pic.h
 
-asio.h.gch: ircd.h asio.h
+asio.h.gch: ircd.h asio.h ctx/continuation.h
 	$(CXX) $(AM_CXXFLAGS) $(CXXFLAGS) -fPIC -o asio.h.gch $(DEFS) $(AM_CPPFLAGS) $(CPPFLAGS) -DPIC asio.h
 
 asio.h.gch: \

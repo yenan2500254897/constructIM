@@ -72,9 +72,9 @@ namespace boost
 #define IRCD_USE_ASIO_WRITE 0
 #endif
 
-#include <boost/asio/detail/config.hpp>
-#include <boost/asio/detail/socket_types.hpp>
-#include <boost/asio/ssl/detail/openssl_types.hpp>
+// #include <boost/asio/detail/config.hpp>
+// #include <boost/asio/detail/socket_types.hpp>
+// #include <boost/asio/ssl/detail/openssl_types.hpp>
 #include <boost/context/stack_context.hpp>
 #include <boost/coroutine/coroutine.hpp>
 
@@ -91,7 +91,7 @@ namespace boost
 #include <boost/asio/io_service.hpp>
 #include <boost/asio/steady_timer.hpp>
 #include <boost/asio/spawn.hpp>
-#include <boost/asio/ssl.hpp>
+// #include <boost/asio/ssl.hpp>
 #pragma GCC diagnostic pop
 #pragma GCC visibility pop
 
@@ -111,17 +111,17 @@ namespace boost::asio::detail
 
 // Boost version dependent behavior for getting the io_service/io_context
 // abstract executor (recent versions) or the derived instance (old versions).
-// namespace ircd::ios
-// {
-// 	extern asio::executor user, main;
-// 	extern std::optional<asio::io_context::strand> primary;
+namespace ircd::ios
+{
+	extern asio::executor user, main;
+	extern std::optional<asio::io_context::strand> primary;
 
-// 	#if BOOST_VERSION >= 107000 && BOOST_VERSION < 107400
-// 	asio::executor &get() noexcept;
-// 	#else
-// 	asio::io_context &get() noexcept;
-// 	#endif
-// }
+	#if BOOST_VERSION >= 107000 && BOOST_VERSION < 107400
+	asio::executor &get() noexcept;
+	#else
+	asio::io_context &get() noexcept;
+	#endif
+}
 
 // The following IRCd headers are not included in the main stdinc.h list of
 // includes because they require boost directly or symbols which we cannot
@@ -129,27 +129,27 @@ namespace boost::asio::detail
 // need these low-level interfaces.
 
 // Context system headers depending on boost.
-// #include <ircd/ctx/continuation.h>
+#include <ircd/ctx/continuation.h>
 
 // Network system headers depending on boost.
 // #include <ircd/net/asio.h>
 
 #if BOOST_VERSION >= 107000 && BOOST_VERSION < 107400
-// inline boost::asio::executor &
-// ircd::ios::get()
-// noexcept
-// {
-// 	assert(bool(main));
-// 	return main;
-// }
+inline boost::asio::executor &
+ircd::ios::get()
+noexcept
+{
+	assert(bool(main));
+	return main;
+}
 #else
-// inline boost::asio::io_context &
-// ircd::ios::get()
-// noexcept
-// {
-// 	auto &context(mutable_cast(main.context()));
-// 	return static_cast<asio::io_context &>(context);
-// }
+inline boost::asio::io_context &
+ircd::ios::get()
+noexcept
+{
+	auto &context(mutable_cast(main.context()));
+	return static_cast<asio::io_context &>(context);
+}
 #endif
 
 // Workaround for bug in io_uring_service::get_sqe(). We have to aim upstream

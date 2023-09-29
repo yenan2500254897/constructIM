@@ -16,6 +16,7 @@
 // Project configuration
 //
 #include "config.h"
+// #include "assert.h"
 #include "stdinc.h"                    // Standard library includes.
 #include "portable.h"
 #include "stduse.h"
@@ -26,15 +27,26 @@
 #include "util/mask.h"
 #include "util/align.h"
 #include "string_view.h"
+#include "vector_view.h"
 #include "buffer/buffer.h"
 #include "allocator/allocator.h"
 #include "util/util.h"
 #include "exception.h"
 #include "panic.h"
 #include "terminate.h"
+#include "run.h"
 #include "strl.h"
 #include "strn.h"
 #include "time.h"
 #include "fmt.h"
+#include "prof/prof.h"
+#include "ios/ios.h"
+#include "ctx/ctx.h"
+
+namespace ircd
+{
+	void printStr(std::string s);
+	void init(boost::asio::executor &&);
+}
 
 #endif
